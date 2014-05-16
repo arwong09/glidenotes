@@ -3,5 +3,10 @@ window.Trellino = {
   Collections: {},
   Views: {},
   Routers: {},
-  initialize: function () {}
-};
+  initialize: function () {
+
+    var boards = new Trellino.Collections.Boards();
+  }
+}
+
+$(Trellino.initialize);
