@@ -12,7 +12,10 @@
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Trellino</a>
       </div>
-      <ul class="nav navbar-right">
+      <ul class="nav nav-pills navbar-right">
+        <li>
+          <a href="#board/new">+</a>
+        </li>
         <li>
           <% if logged_in? %>
             <%= button_to "Log out", session_url, { method: :delete, class: "btn btn-xs btn-warning" } %>
@@ -21,6 +24,8 @@
       </ul>
     </div>
   </nav>
+  
+  <div id="content"></div>
 
   <%= yield %>
 
