@@ -1,1 +1,7 @@
 <h3><%= model.get('title') %></h3>
+
+<ul>
+<% model.lists().each(function(list){ %>
+  <li><%= list.get('title') %></li>
+<% }); %>
+</ul>

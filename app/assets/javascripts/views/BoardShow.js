@@ -5,7 +5,4 @@ Trellino.Views.BoardShow = Backbone.View.extend({
     this.$el.html(renderedContent);
     return this;
   },
-  initialize: function() {
-    
-  }
 });
