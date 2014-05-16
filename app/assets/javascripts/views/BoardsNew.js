@@ -24,8 +24,8 @@ Trellino.Views.BoardsNew = Backbone.View.extend({
     if(this.collection.length === 1) {
       this.collection.fetch();
     } else {
-    var renderedView = view.render();
-    $('#content').html(renderedView.$el);
+      var renderedView = view.render();
+      $('#content').html(renderedView.$el);
     }
   }
 });

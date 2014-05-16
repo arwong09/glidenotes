@@ -18,8 +18,10 @@ Trellino.Routers.BoardRouter = Backbone.Router.extend({
     $('#content').html(renderedView.$el);
   },
   
-  showView: function() {
-    var view = new Trellino.Views.BoardShow({model: this.model});
+  showView: function(id) {
+    var thisCollection = Trellino.Collections.boards
+    var thisModel = thisCollection.findWhere({ 'id': parseInt(id) });
+    var view = new Trellino.Views.BoardShow({model: thisModel});
     var renderedView = view.render();
     $('#content').html(renderedView.$el);
   }
