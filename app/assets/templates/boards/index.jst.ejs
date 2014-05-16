@@ -1,4 +1,4 @@
 <h3>My Boards</h3>
 <% collection.each(function(board){ %>
-  <p><%= board.get('title') %></p>
+  <p><a href="#board/<%= board.get('id') %>"><%= board.get('title') %></a></p>
 <% }); %>

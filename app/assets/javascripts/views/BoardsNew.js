@@ -12,17 +12,20 @@ Trellino.Views.BoardsNew = Backbone.View.extend({
     this.listenTo(this.collection, "add", this.addBoard);
   },
   submit: function(event) {
-    debugger
     event.preventDefault();
+
     var boardTitle = $(event.currentTarget).serializeJSON().board;
     var newModel = new Trellino.Models.Board();
     newModel.save(boardTitle);
     this.collection.add(newModel);
   },
   addBoard: function() {
-    debugger
     var view = new Trellino.Views.BoardsIndex({collection: this.collection});
+    if(this.collection.length === 1) {
+      this.collection.fetch();
+    } else {
     var renderedView = view.render();
     $('#content').html(renderedView.$el);
+    }
   }
 });
