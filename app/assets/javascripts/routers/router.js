@@ -2,7 +2,7 @@ Trellino.Routers.BoardRouter = Backbone.Router.extend({
   routes: {
     '': 'indexView',
     'board/new': 'newView',
-    'board/:id': 'showView'
+    'board/:id': 'showView',
   },
   
   indexView: function() {

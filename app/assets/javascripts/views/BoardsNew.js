@@ -13,19 +13,19 @@ Trellino.Views.BoardsNew = Backbone.View.extend({
   },
   submit: function(event) {
     event.preventDefault();
-
-    var boardTitle = $(event.currentTarget).serializeJSON().board;
-    var newModel = new Trellino.Models.Board();
-    newModel.save(boardTitle);
-    this.collection.add(newModel);
+    var titleAttr = $(event.currentTarget).serializeJSON().board;
+    this.collection.create(titleAttr, {wait: true});
   },
   addBoard: function() {
-    var view = new Trellino.Views.BoardsIndex({collection: this.collection});
-    if(this.collection.length === 1) {
-      this.collection.fetch();
-    } else {
-      var renderedView = view.render();
-      $('#content').html(renderedView.$el);
-    }
+    var id = this.collection.last().id;
+    var url = "/board/" + id;
+    Trellino.router.navigate(url, {trigger: true});
+    // var view = new Trellino.Views.BoardsIndex({collection: this.collection});
+    // if(this.collection.length === 1) {
+    //   this.collection.fetch();
+    // } else {
+    //   var renderedView = view.render();
+    //   $('#content').html(renderedView.$el);
+    // }
   }
 });

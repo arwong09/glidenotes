@@ -5,7 +5,7 @@ window.Trellino = {
   Routers: {},
   initialize: function () {
     Trellino.Collections.boards = new Trellino.Collections.Boards();
-    new Trellino.Routers.BoardRouter();
+    Trellino.router = new Trellino.Routers.BoardRouter();
     Backbone.history.start();
   }
 }
