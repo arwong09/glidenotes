@@ -2,6 +2,6 @@
 
 <ul>
 <% model.lists().each(function(list){ %>
-  <li><%= list.get('title') %></li>
+  <li><%= list.get('title') %> <%= list.get('rank') %></li>
 <% }); %>
 </ul>
