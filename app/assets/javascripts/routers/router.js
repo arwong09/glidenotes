@@ -19,10 +19,14 @@ Trellino.Routers.BoardRouter = Backbone.Router.extend({
   },
   
   showView: function(id) {
-    var thisCollection = Trellino.Collections.boards
-    var thisModel = thisCollection.findWhere({ 'id': parseInt(id) });
-    var view = new Trellino.Views.BoardShow({model: thisModel});
-    var renderedView = view.render();
-    $('#content').html(renderedView.$el);
+    var thisCollection = Trellino.Collections.boards;
+    thisCollection.fetch({
+      success: function() {
+        var thisModel = thisCollection.findWhere({ 'id': parseInt(id) });
+        var view = new Trellino.Views.BoardShow({model: thisModel});
+        var renderedView = view.render();
+        $('#content').html(renderedView.$el);
+      }
+    }); 
   }
 });
