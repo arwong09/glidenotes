@@ -1,3 +1,8 @@
 Trellino.Models.List = Backbone.Model.extend({
-  url: '/api/boards/:board_id/lists'
+  urlRoot: function() {
+    return '/api/boards/' + this.board_id + '/lists'
+  },
+  initialize: function(options) {
+   this.board_id = options.board_id; 
+  }
 });

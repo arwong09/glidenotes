@@ -20,12 +20,5 @@ Trellino.Views.BoardsNew = Backbone.View.extend({
     var id = this.collection.last().id;
     var url = "/board/" + id;
     Trellino.router.navigate(url, {trigger: true});
-    // var view = new Trellino.Views.BoardsIndex({collection: this.collection});
-    // if(this.collection.length === 1) {
-    //   this.collection.fetch();
-    // } else {
-    //   var renderedView = view.render();
-    //   $('#content').html(renderedView.$el);
-    // }
   }
 });
