@@ -23,7 +23,7 @@ Trellino.Routers.BoardRouter = Backbone.Router.extend({
     var thisCollection = Trellino.Collections.boards;
     thisCollection.fetch({
       success: function() {
-        var thisModel = thisCollection.findWhere({ 'id': parseInt(id) });
+        var thisModel = thisCollection.findWhere({'id': parseInt(id)});
         var view = new Trellino.Views.BoardShow({model: thisModel});
         var renderedView = view.render();
         $('#content').html(renderedView.$el);
@@ -35,7 +35,7 @@ Trellino.Routers.BoardRouter = Backbone.Router.extend({
     var thisCollection = Trellino.Collections.boards;
     thisCollection.fetch({
       success: function() {
-        var thisBoard = thisCollection.findWhere({ 'id': parseInt(id) });
+        var thisBoard = thisCollection.findWhere({'id': parseInt(id)});
         var thisLists = thisBoard.lists();
         var view = new Trellino.Views.ListsNew({collection: thisLists, model: thisBoard});
         var renderedView = view.render();

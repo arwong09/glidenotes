@@ -1,11 +1,12 @@
 <h3><%= model.get('title') %></h3>
+<% model.lists().each(function(list){ %>
+  <div class="col-xs-1">
+    <%= list.get('title') %> <%= list.get('rank') %>
+    <button class="btn btn-success btn-xs">add member</button>
+  </div>
+<% }); %>
+
 <div class="col-xs-2">
-  <ul>
-  <% model.lists().each(function(list){ %>
-    <li><%= list.get('title') %> <%= list.get('rank') %></li>
-  <% }); %>
-  </ul>
-</div>
-<div class="col-xs-2">
-  <a href="#board/<%= model.get('id') %>/lists" class="btn btn-primary">Add new list</a>
+  <a href="#board/<%= model.get('id') %>/lists" class="btn btn-primary">
+    Add new list</a>
 </div>
