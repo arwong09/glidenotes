@@ -9,6 +9,7 @@ Trellino.Views.BoardShow = Backbone.View.extend({
     'submit #member-form' : "submit"
   },
   submit: function(event) {
+    debugger
     var view = this;
     event.preventDefault();
     var params = $(event.currentTarget).serializeJSON();
@@ -17,6 +18,10 @@ Trellino.Views.BoardShow = Backbone.View.extend({
       success: function() {
         var renderedView = view.render();
         $('#content').html(renderedView.$el);
+        view.delegateEvents();
+      },
+      error: function() {
+        $('#errors').html("User not found").addClass('alert alert-danger');
       }
     })
   },

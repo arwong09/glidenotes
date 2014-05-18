@@ -26,15 +26,19 @@ module Api
       if params[:newMemberEmail]
         email = params[:newMemberEmail]
         new_member = User.find_by_email(email)
-        @board.members << new_member if new_member && !@board.members.include?(new_member)
+        if new_member.nil?
+          render json: { errors: "User not found" }, status: 404
+        else 
+          @board.members << new_member if new_member && !@board.members.include?(new_member)
+          
+          if @board.update_attributes(board_params)
+            render partial: "api/boards/board", locals: { board: @board }
+          else
+            render json: { errors: @board.errors.full_messages }, status: 422
+          end
+        end
       end
-      
-      if @board.update_attributes(board_params)
-        render partial: "api/boards/board", locals: { board: @board }
-      else
-        render json: { errors: @board.errors.full_messages }, status: 422
-      end
-    end
+    end 
 
     def destroy
       current_user.boards.find(params[:id]).try(:destroy)
