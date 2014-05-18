@@ -2,7 +2,13 @@
 <% model.lists().each(function(list){ %>
   <div class="col-xs-1">
     <%= list.get('title') %> <%= list.get('rank') %>
-    <button class="btn btn-success btn-xs">add member</button>
+    <br>
+    <label for="email-form">email</label>
+    <form action="#" id="member-form">
+      <input type="text" name="newMemberEmail" value="" id="email-form">
+    
+      <input type="submit" class="btn btn-success btn-xs">add member</button>
+  </form>
   </div>
 <% }); %>
 
