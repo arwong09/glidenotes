@@ -6,6 +6,15 @@ Trellino.Views.BoardsIndex = Backbone.View.extend({
     return this;
   },
   initialize: function() {
-    this.listenTo(this.collection, "sync", this.render);
+    this.listenTo(this.collection, "sync remove", this.render);
+  },
+  events: {
+    "click .glyphicon-trash": "destroyBoard"
+  },
+  destroyBoard: function(event) {
+    event.preventDefault();
+    var id = $(event.target).attr("data-id");
+    var model = Trellino.Collections.boards.findWhere({id: parseInt(id)});
+    model.destroy();
   }
 });
