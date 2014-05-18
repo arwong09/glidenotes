@@ -1,7 +1,7 @@
 module Api
   class BoardsController < ApiController
     def index
-      @boards = Board.includes(:lists, :cards).all
+      @boards = current_user.boards.includes(:lists, :cards).all
       render :index
     end
 
