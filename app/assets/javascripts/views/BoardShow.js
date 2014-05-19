@@ -8,7 +8,6 @@ Trellino.Views.BoardShow = Backbone.View.extend({
   initialize: function() {
     this.listenTo(this.model.lists(), "cardAdded", this.render);
     this.listenTo(this.model.lists(), "cardDestroyed", this.render);
-    // this.listenTo(this, "renderFinished", this.handleSorting);
   },
   handleSorting: function() {
     var view = this;
@@ -35,22 +34,37 @@ Trellino.Views.BoardShow = Backbone.View.extend({
           newRank++;
         });
       },
+      tolerance: 'pointer',
       placeholder: "placeholder"
     });
     
     $( ".sortable-cards" ).disableSelection();
     
     $( ".sortable-lists").sortable({
+      connectWith: ".sortable-lists",
       start: function(event, ui) {
         $(ui.item).toggleClass("dragging");
         ui.placeholder.height(ui.item.height());
         ui.placeholder.width(ui.item.width());
+        // $(ui.placeholder).toggleClass('custom');
       },
       stop: function(event, ui) {
         $(ui.item).toggleClass("dragging");
       },
-      placeholder: "placeholder" 
+      update: function(event, ui) {
+        var newRank = 1;
+        $('.list-panel').each(function() {
+          var listID = $(this).attr('data-id');
+          var list = view.model.get('lists').findWhere({id: parseInt(listID)});
+          list.set({rank: newRank});
+          list.save();
+          newRank++;
+        });
+      },
+      tolerance: 'pointer',
+      // placeholder: "placeholder" 
     });
+    
     $( ".sortable-lists").disableSelection();
   },
   events: {

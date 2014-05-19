@@ -1,42 +1,50 @@
-<div class="col-xs-2">
-  <h3><%= model.get('title') %></h3>
+<div class="row">
+  <div class="col-xs-1 col-xs-offset-1">
+    <h3><%= model.get('title') %></h3>
+  </div>
+</div>
 
-  <ul class="sortable-lists">
-  <% model.lists().each(function(list){ %>
-    <li class="ui-state-default">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <%= list.get('title') %> <%= list.get('rank') %>
-        </div>
-      
-        <div class="panel-body">
-          <a href="#" data-id="<%= list.get('id') %>" 
-            class="glyphicon glyphicon-plus pull-right"></a>
-            <div id="add-card-<%= list.get('id') %>"></div>
+<div class="row">
+  <ul class="sortable-lists"><!-- BEGIN UL OF LIST -->
+    <% model.lists().each(function(list){ %><!-- ITERATE THROUGH ALL LISTS -->
+      <!-- <div class="col-xs-2"> -->
+        <li class="ui-state-default list-panel panel panel-default"
+          data-id="<%= list.get('id') %>">
           
-          <ul class="sortable-cards" data-listid='<%= list.get('id') %>'>
-          <% list.cards().each(function(card){ %>
-            <li class='ui-state-default card-li' 
-            data-id='<%= card.get('id') %>'  data-listid='<%= list.get('id') %>'>
-              <div class='panel panel-default' data-id='<%= card.get('id') %>'>
-                <div class='panel-body' data-id='<%= card.get('id') %>' data-listid='<%= list.get('id') %>'>
-                  <%= card.get('title') %>
-                  <a href="#" data-id='<%= card.get('id') %>' 
-                    data-listid='<%= list.get('id') %>'
-                    class='glyphicon glyphicon-trash trash-hover'></a>
-                </div>
-              </div>
-            </li>
-          <% }) %>
-        </ul>
-      </div>
-    </div>
-  </li>
-     
-  <% }); %>
-</ul>
+          <div class="panel-heading">
+            <%= list.get('title') %> <%= list.get('rank') %>
+          </div>
+          
+          <div class="panel-body">
+            <a href="#" data-id="<%= list.get('id') %>" 
+              class="glyphicon glyphicon-plus pull-right"></a>
+            <div id="add-card-<%= list.get('id') %>"></div><!-- ADDS A CARD  -->
+          
+            <ul class="sortable-cards" data-listid="<%= list.get('id') %>">
+              <% list.cards().each(function(card){ %>
+                <li class='ui-state-default card-li' 
+                  data-id="<%= card.get('id') %>"  
+                  data-listid='<%= list.get('id') %>'>
+                  <div class='panel panel-default panel-body' 
+                    data-id="<%= card.get('id') %>" 
+                    data-listid="<%= list.get('id') %>">
+                    <!-- deleted from here -->
+                    <%= card.get('title') %>
+                    <a href="#" data-id='<%= card.get("id") %>' 
+                      data-listid='<%= list.get("id") %>'
+                      class='glyphicon glyphicon-trash trash-hover'></a>
+                  </div>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+        </li>
+      <!-- </div><!-- END LIST COLUMN --> -->
+    <% }); %><!--- END ITERATING THROUGH LISTS -->
+  </ul>
+</div>
 
-  <div class="panel panel-default">
+  <!-- <div class="panel panel-default">
     <div class="panel-heading">
       Add a Board Member
     </div>
@@ -57,10 +65,11 @@
       <div id="errors"></div>
     </div>
   </div>
-</div><!-- END COLUMN -->
-
-<div class="col-xs-2">
-  <a href="#board/<%= model.get('id') %>/lists" class="btn btn-primary">
-    Add new list
-  </a>
+</div> --><!-- END COLUMN -->
+<div class="row">
+  <div class="col-xs-2">
+    <a href="#board/<%= model.get('id') %>/lists" class="btn btn-primary">
+      Add new list
+    </a>
+  </div>
 </div>
