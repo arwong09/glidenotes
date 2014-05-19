@@ -9,9 +9,10 @@
       </div>
       
       <div class="panel-body">
-        <div id="add-card-<%= list.get('id') %>"></div>
         <a href="#" data-id="<%= list.get('id') %>" 
           class="glyphicon glyphicon-plus pull-right"></a>
+          <div id="add-card-<%= list.get('id') %>"></div>
+          
           <% list.cards().each(function(card){ %>
             <div class='panel panel-default'>
               <div class='panel-body'>
