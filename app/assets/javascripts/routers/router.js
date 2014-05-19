@@ -3,7 +3,8 @@ Trellino.Routers.BoardRouter = Backbone.Router.extend({
     '': 'indexView',
     'board/new': 'newView',
     'board/:id': 'showView',
-    'board/:id/lists': 'newList'
+    'board/:id/lists': 'newList',
+    'lists/:list_id/cards': 'newCard'
   },
   
   indexView: function() {
@@ -40,5 +41,9 @@ Trellino.Routers.BoardRouter = Backbone.Router.extend({
         $('#content').html(renderedView.$el);
       }
     });  
+  },
+  
+  newCard: function(list_id) {
+    
   }
 });

@@ -9,5 +9,7 @@ Trellino.Collections.Lists = Backbone.Collection.extend({
     this.board = options.board;
   },
   
-  comparator: 'rank'
+  comparator: function(){
+    return this.get('rank');
+  }
 });
