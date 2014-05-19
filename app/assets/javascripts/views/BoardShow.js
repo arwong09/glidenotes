@@ -6,10 +6,10 @@ Trellino.Views.BoardShow = Backbone.View.extend({
     return this;
   },
   events: {
-    'submit #member-form' : "submit"
+    'submit #member-form' : "submit",
+    'click .glyphicon-plus' : "newCardView",
   },
   submit: function(event) {
-    debugger
     var view = this;
     event.preventDefault();
     var params = $(event.currentTarget).serializeJSON();
@@ -25,4 +25,11 @@ Trellino.Views.BoardShow = Backbone.View.extend({
       }
     })
   },
+  newCardView: function(event) {
+    event.preventDefault();
+    var listID = $(event.currentTarget).attr("data-id");
+    var list = this.model.lists().findWhere({id: parseInt(listID)});
+    var view = new Trellino.Views.CardsNew({board: this.model, model: list});
+    $('#content').html(view.render().$el);
+  }
 });

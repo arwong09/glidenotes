@@ -4,7 +4,7 @@ Trellino.Routers.BoardRouter = Backbone.Router.extend({
     'board/new': 'newView',
     'board/:id': 'showView',
     'board/:id/lists': 'newList',
-    'lists/:list_id/cards': 'newCard'
+    // 'lists/:list_id/cards': 'newCard'
   },
   
   indexView: function() {
@@ -44,6 +44,15 @@ Trellino.Routers.BoardRouter = Backbone.Router.extend({
   },
   
   newCard: function(list_id) {
-    
+    var lists = new Trellino.Collections.Lists([], {})
+    lists.fetch({
+      success: function(){
+        var thisList = lists.findWhere({'id': parseInt(list_id)});
+        var thisCards = thisList.cards();
+        var view = new Trellino.Views.CardsNew({collection: thisCards, model: thisList});
+        var renderedView = view.render();
+        $('#content').html(renderedView.$el);
+      }
+    })
   }
 });
