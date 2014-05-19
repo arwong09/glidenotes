@@ -30,6 +30,6 @@ Trellino.Views.BoardShow = Backbone.View.extend({
     var listID = $(event.currentTarget).attr("data-id");
     var list = this.model.lists().findWhere({id: parseInt(listID)});
     var view = new Trellino.Views.CardsNew({board: this.model, model: list});
-    $('#content').html(view.render().$el);
+    $('#add-card-' + listID).html(view.render().$el);
   }
 });
