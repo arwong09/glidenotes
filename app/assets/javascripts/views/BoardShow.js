@@ -1,6 +1,7 @@
 Trellino.Views.BoardShow = Backbone.View.extend({
   template: JST['boards/show'],
   render: function() {
+    this.model.lists().sort();
     var renderedContent = this.template({model: this.model});
     this.$el.html(renderedContent);
     return this;
