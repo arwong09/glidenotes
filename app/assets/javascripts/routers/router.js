@@ -23,9 +23,13 @@ Trellino.Routers.BoardRouter = Backbone.Router.extend({
     Trellino.Collections.boards.fetch({
       success: function() {
         var thisModel = Trellino.Collections.boards.findWhere({'id': parseInt(id)});
-        var view = new Trellino.Views.BoardShow({model: thisModel});
-        var renderedView = view.render();
-        $('#content').html(renderedView.$el);
+        thisModel.lists().fetch({
+          success: function() {
+            var view = new Trellino.Views.BoardShow({model: thisModel});
+            var renderedView = view.render();
+            $('#content').html(renderedView.$el);
+          }
+        })
       }
     }); 
   },
