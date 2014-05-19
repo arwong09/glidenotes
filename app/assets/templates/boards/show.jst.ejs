@@ -13,16 +13,18 @@
           class="glyphicon glyphicon-plus pull-right"></a>
           <div id="add-card-<%= list.get('id') %>"></div>
           
+          <ul class="sortable-cards">
           <% list.cards().each(function(card){ %>
-            <div class='panel panel-default'>
+            <li class='ui-state-default'><div class='panel panel-default'>
               <div class='panel-body'>
                 <%= card.get('title') %>
                 <a href="#" data-id='<%= card.get('id') %>' 
                   data-listid='<%= list.get('id') %>'
                   class='glyphicon glyphicon-trash trash-hover'></a>
               </div>
-            </div>
+            </div></li>
           <% }) %>
+        </ul>
       </div>
     </div>
      
@@ -56,3 +58,10 @@
     Add new list
   </a>
 </div>
+
+<script>
+  $(function() {
+    $( ".sortable-cards" ).sortable();
+    $( ".sortable-cards" ).disableSelection();
+  });
+</script>

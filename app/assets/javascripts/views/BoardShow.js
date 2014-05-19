@@ -7,7 +7,7 @@ Trellino.Views.BoardShow = Backbone.View.extend({
   },
   initialize: function() {
     this.listenTo(this.model.lists(), "cardAdded", this.render);
-    this.listenTo(this.model.lists(), "cardDestroyed", this.render)
+    this.listenTo(this.model.lists(), "cardDestroyed", this.render);
   },
   events: {
     'submit #member-form' : "submit",
