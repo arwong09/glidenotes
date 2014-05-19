@@ -63,35 +63,5 @@
 </div>
 
 <script>
-  $(function() {
-    $( ".sortable-cards" ).sortable({ 
-      connectWith: ".sortable-cards",
-      start: function(event, ui) {
-        $(ui.item).toggleClass("dragging");
-        ui.placeholder.height(ui.item.height());
-      },
-      stop: function(event, ui) {
-        $(ui.item).toggleClass("dragging");
-      },
-      update: function() {
-        var newRank = 1;
-        $('.sortable-cards').each(function(card) {
-          var cardID = card.attr('data-id');
-        })
-      },
-      placeholder: "placeholder"
-    });
-    $( ".sortable-cards" ).disableSelection();
-    $( ".sortable-lists").sortable({
-      start: function(event, ui) {
-        $(ui.item).toggleClass("dragging");
-        ui.placeholder.height(ui.item.height());
-      },
-      stop: function(event, ui) {
-        $(ui.item).toggleClass("dragging");
-      },
-      placeholder: "placeholder" 
-    });
-    $( ".sortable-lists").disableSelection();
-  });
+ 
 </script>

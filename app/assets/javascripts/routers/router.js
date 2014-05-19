@@ -28,6 +28,7 @@ Trellino.Routers.BoardRouter = Backbone.Router.extend({
             var view = new Trellino.Views.BoardShow({model: thisModel});
             var renderedView = view.render();
             $('#content').html(renderedView.$el);
+            view.handleSorting();
           }
         })
       }

@@ -8,6 +8,39 @@ Trellino.Views.BoardShow = Backbone.View.extend({
   initialize: function() {
     this.listenTo(this.model.lists(), "cardAdded", this.render);
     this.listenTo(this.model.lists(), "cardDestroyed", this.render);
+    this.listenTo(this, "renderFinished", this.handleSorting);
+  },
+  handleSorting: function() {
+    $( ".sortable-cards" ).sortable({ 
+      connectWith: ".sortable-cards",
+      start: function(event, ui) {
+        $(ui.item).toggleClass("dragging");
+        ui.placeholder.height(ui.item.height());
+      },
+      stop: function(event, ui) {
+        $(ui.item).toggleClass("dragging");
+      },
+      // update: function() {
+ //        var newRank = 1;
+ //        $('.sortable-cards').each(function(card) {
+ //          var cardID = card.attr('data-id');
+ //        })
+ //      },
+      placeholder: "placeholder"
+    });
+    $( ".sortable-cards" ).disableSelection();
+    
+    $( ".sortable-lists").sortable({
+      start: function(event, ui) {
+        $(ui.item).toggleClass("dragging");
+        ui.placeholder.height(ui.item.height());
+      },
+      stop: function(event, ui) {
+        $(ui.item).toggleClass("dragging");
+      },
+      placeholder: "placeholder" 
+    });
+    $( ".sortable-lists").disableSelection();
   },
   events: {
     'submit #member-form' : "submit",
