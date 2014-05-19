@@ -1,7 +1,6 @@
 Trellino.Views.BoardShow = Backbone.View.extend({
   template: JST['boards/show'],
   render: function() {
-    debugger
     var renderedContent = this.template({model: this.model});
     this.$el.html(renderedContent);
     return this;
@@ -23,14 +22,15 @@ Trellino.Views.BoardShow = Backbone.View.extend({
       stop: function(event, ui) {
         $(ui.item).toggleClass("dragging");
       },
-      update: function() {
+      update: function(event, ui) {
         var newRank = 1;
         $('.card-li').each(function() {
           var cardID = $(this).attr('data-id');
-          var listID = $(this).attr('data-listid');
-          var list = view.model.get('lists').findWhere({id: parseInt(listID)});
+          var oldListID = $(this).attr('data-listid');
+          var newListID = $(this).parent().attr('data-listid');
+          var list = view.model.get('lists').findWhere({id: parseInt(oldListID)});
           var card = list.cards().findWhere({id: parseInt(cardID)});
-          card.set({rank: newRank});
+          card.set({rank: newRank, list_id: parseInt(newListID)});
           card.save();
           newRank++;
         });

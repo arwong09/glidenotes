@@ -14,9 +14,10 @@
             class="glyphicon glyphicon-plus pull-right"></a>
             <div id="add-card-<%= list.get('id') %>"></div>
           
-          <ul class="sortable-cards">
+          <ul class="sortable-cards" data-listid='<%= list.get('id') %>'>
           <% list.cards().each(function(card){ %>
-            <li class='ui-state-default card-li' data-listid='<%= list.get('id') %>' data-id='<%= card.get('id') %>'>
+            <li class='ui-state-default card-li' 
+            data-id='<%= card.get('id') %>'  data-listid='<%= list.get('id') %>'>
               <div class='panel panel-default' data-id='<%= card.get('id') %>'>
                 <div class='panel-body' data-id='<%= card.get('id') %>' data-listid='<%= list.get('id') %>'>
                   <%= card.get('title') %>
