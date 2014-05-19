@@ -11,6 +11,7 @@ Trellino.Views.BoardShow = Backbone.View.extend({
   events: {
     'submit #member-form' : "submit",
     'click .glyphicon-plus' : "newCardView",
+    'click .trash-hover' : 'destroyCard'
   },
   submit: function(event) {
     var view = this;
@@ -34,5 +35,16 @@ Trellino.Views.BoardShow = Backbone.View.extend({
     var list = this.model.lists().findWhere({id: parseInt(listID)});
     var view = new Trellino.Views.CardsNew({board: this.model, model: list});
     $('#add-card-' + listID).html(view.render().$el);
+  },
+  destroyCard: function(event) {
+    event.preventDefault();
+    var listID = $(event.currentTarget).attr("data-listid");
+
+    var list = this.model.lists().findWhere({id: parseInt(listID)});
+
+    // var cardColl = new Trellino.Collections.Cards([])
+    var cardID = $(event.currentTarget).attr("data-id");
+    var card = list.cards().findWhere({id: parseInt(cardID)});
+    card.destroy();
   }
 });
