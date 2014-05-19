@@ -1,32 +1,26 @@
 <div class="col-xs-2">
   <h3><%= model.get('title') %></h3>
-
+  
   <% model.lists().each(function(list){ %>
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <%= list.get('title') %> <%= list.get('rank') %>
-      </div>
+    <ul class="sortable-lists">
+      <%= list.get('title') %> <%= list.get('rank') %>
+      <a href="#" data-id="<%= list.get('id') %>" 
+        class="glyphicon glyphicon-plus pull-right"></a>
+      <div id="add-card-<%= list.get('id') %>"></div>
       
-      <div class="panel-body">
-        <a href="#" data-id="<%= list.get('id') %>" 
-          class="glyphicon glyphicon-plus pull-right"></a>
-          <div id="add-card-<%= list.get('id') %>"></div>
-          
-          <ul class="sortable-cards">
+      <li class="ui-state-default panel panel-body panel-default">  
+        <ul class="sortable-cards">
           <% list.cards().each(function(card){ %>
-            <li class='ui-state-default'><div class='panel panel-default'>
-              <div class='panel-body'>
-                <%= card.get('title') %>
-                <a href="#" data-id='<%= card.get('id') %>' 
-                  data-listid='<%= list.get('id') %>'
-                  class='glyphicon glyphicon-trash trash-hover'></a>
-              </div>
-            </div></li>
+            <li class='ui-state-default panel panel-body panel-default'>
+              <%= card.get('title') %>
+              <a href="#" data-id='<%= card.get('id') %>' 
+                data-listid='<%= list.get('id') %>'
+                class='glyphicon glyphicon-trash trash-hover'></a>
+            </li>
           <% }) %>
         </ul>
-      </div>
-    </div>
+      </li>
+    </ul>
      
   <% }); %>
 
@@ -61,7 +55,9 @@
 
 <script>
   $(function() {
-    $( ".sortable-cards" ).sortable();
+    $( ".sortable-cards" ).sortable({ connectWith: ".sortable-cards" });
     $( ".sortable-cards" ).disableSelection();
+    $( ".sortable-lists").sortable();
+    $( ".sortable-lists").disableSelection();
   });
 </script>

@@ -26,6 +26,7 @@ module Api
       if params[:newMemberEmail]
         email = params[:newMemberEmail]
         new_member = User.find_by_email(email)
+        
         if new_member.nil?
           render json: { errors: "User not found" }, status: 404
         else 
