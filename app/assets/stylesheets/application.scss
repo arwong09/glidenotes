@@ -32,15 +32,17 @@
 }
 
 .dragging {
-  box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
   transform: rotate(5deg);
   -ms-transform:rotate(5deg);
   -webkit-transform:rotate(5deg); /* Opera, Chrome, and Safari */
   cursor: -webkit-grabbing;
   cursor: -moz-grabbing;
+  margin-top: 5px;
 }
 
 .placeholder {
   background-color: #f6f6f6;
   list-style: none;
+  margin-bottom: 20px;
 }

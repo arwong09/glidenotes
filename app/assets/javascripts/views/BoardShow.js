@@ -1,6 +1,7 @@
 Trellino.Views.BoardShow = Backbone.View.extend({
   template: JST['boards/show'],
   render: function() {
+    debugger
     var renderedContent = this.template({model: this.model});
     this.$el.html(renderedContent);
     return this;
@@ -43,6 +44,7 @@ Trellino.Views.BoardShow = Backbone.View.extend({
       start: function(event, ui) {
         $(ui.item).toggleClass("dragging");
         ui.placeholder.height(ui.item.height());
+        ui.placeholder.width(ui.item.width());
       },
       stop: function(event, ui) {
         $(ui.item).toggleClass("dragging");
