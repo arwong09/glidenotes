@@ -8,7 +8,7 @@ Trellino.Views.BoardShow = Backbone.View.extend({
   initialize: function() {
     this.listenTo(this.model.lists(), "cardAdded", this.render);
     this.listenTo(this.model.lists(), "cardDestroyed", this.render);
-    this.listenTo(this, "renderFinished", this.handleSorting);
+    // this.listenTo(this, "renderFinished", this.handleSorting);
   },
   handleSorting: function() {
     var view = this;
@@ -24,13 +24,14 @@ Trellino.Views.BoardShow = Backbone.View.extend({
       },
       update: function() {
         var newRank = 1;
-        $('.sortable-cards').each(function() {
-          var cardID = $(event.target).attr('data-id');
-          var listID = $(event.target).attr('data-listid');
+        $('.card-li').each(function() {
+          var cardID = $(this).attr('data-id');
+          var listID = $(this).attr('data-listid');
           var list = view.model.get('lists').findWhere({id: parseInt(listID)});
           var card = list.cards().findWhere({id: parseInt(cardID)});
           card.set({rank: newRank});
           card.save();
+          newRank++;
         });
       },
       placeholder: "placeholder"
