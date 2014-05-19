@@ -16,14 +16,16 @@
           
           <ul class="sortable-cards">
           <% list.cards().each(function(card){ %>
-            <li class='ui-state-default'><div class='panel panel-default'>
-              <div class='panel-body'>
-                <%= card.get('title') %>
-                <a href="#" data-id='<%= card.get('id') %>' 
-                  data-listid='<%= list.get('id') %>'
-                  class='glyphicon glyphicon-trash trash-hover'></a>
+            <li class='ui-state-default'>
+              <div class='panel panel-default' data-id='<%= card.get('id') %>'>
+                <div class='panel-body' data-id='<%= card.get('id') %>' data-listid='<%= list.get('id') %>'>
+                  <%= card.get('title') %>
+                  <a href="#" data-id='<%= card.get('id') %>' 
+                    data-listid='<%= list.get('id') %>'
+                    class='glyphicon glyphicon-trash trash-hover'></a>
+                </div>
               </div>
-            </div></li>
+            </li>
           <% }) %>
         </ul>
       </div>

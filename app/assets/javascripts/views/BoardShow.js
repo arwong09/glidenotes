@@ -11,7 +11,9 @@ Trellino.Views.BoardShow = Backbone.View.extend({
     this.listenTo(this, "renderFinished", this.handleSorting);
   },
   handleSorting: function() {
-    $( ".sortable-cards" ).sortable({ 
+    var view = this;
+    
+    $( ".sortable-cards" ).sortable({
       connectWith: ".sortable-cards",
       start: function(event, ui) {
         $(ui.item).toggleClass("dragging");
@@ -20,14 +22,20 @@ Trellino.Views.BoardShow = Backbone.View.extend({
       stop: function(event, ui) {
         $(ui.item).toggleClass("dragging");
       },
-      // update: function() {
- //        var newRank = 1;
- //        $('.sortable-cards').each(function(card) {
- //          var cardID = card.attr('data-id');
- //        })
- //      },
+      update: function() {
+        var newRank = 1;
+        $('.sortable-cards').each(function() {
+          var cardID = $(event.target).attr('data-id');
+          var listID = $(event.target).attr('data-listid');
+          var list = view.model.get('lists').findWhere({id: parseInt(listID)});
+          var card = list.cards().findWhere({id: parseInt(cardID)});
+          card.set({rank: newRank});
+          card.save();
+        });
+      },
       placeholder: "placeholder"
     });
+    
     $( ".sortable-cards" ).disableSelection();
     
     $( ".sortable-lists").sortable({
