@@ -1,28 +1,37 @@
 <div class="col-xs-2">
   <h3><%= model.get('title') %></h3>
-  
+
+  <ul class="sortable-lists">
   <% model.lists().each(function(list){ %>
-    <ul class="sortable-lists">
-      <%= list.get('title') %> <%= list.get('rank') %>
-      <a href="#" data-id="<%= list.get('id') %>" 
-        class="glyphicon glyphicon-plus pull-right"></a>
-      <div id="add-card-<%= list.get('id') %>"></div>
+    <li class="ui-state-default">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= list.get('title') %> <%= list.get('rank') %>
+        </div>
       
-      <li class="ui-state-default panel panel-body panel-default">  
-        <ul class="sortable-cards">
+        <div class="panel-body">
+          <a href="#" data-id="<%= list.get('id') %>" 
+            class="glyphicon glyphicon-plus pull-right"></a>
+            <div id="add-card-<%= list.get('id') %>"></div>
+          
+          <ul class="sortable-cards">
           <% list.cards().each(function(card){ %>
-            <li class='ui-state-default panel panel-body panel-default'>
-              <%= card.get('title') %>
-              <a href="#" data-id='<%= card.get('id') %>' 
-                data-listid='<%= list.get('id') %>'
-                class='glyphicon glyphicon-trash trash-hover'></a>
-            </li>
+            <li class='ui-state-default'><div class='panel panel-default'>
+              <div class='panel-body'>
+                <%= card.get('title') %>
+                <a href="#" data-id='<%= card.get('id') %>' 
+                  data-listid='<%= list.get('id') %>'
+                  class='glyphicon glyphicon-trash trash-hover'></a>
+              </div>
+            </div></li>
           <% }) %>
         </ul>
-      </li>
-    </ul>
+      </div>
+    </div>
+  </li>
      
   <% }); %>
+</ul>
 
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -55,9 +64,34 @@
 
 <script>
   $(function() {
-    $( ".sortable-cards" ).sortable({ connectWith: ".sortable-cards" });
+    $( ".sortable-cards" ).sortable({ 
+      connectWith: ".sortable-cards",
+      start: function(event, ui) {
+        $(ui.item).toggleClass("dragging");
+        ui.placeholder.height(ui.item.height());
+      },
+      stop: function(event, ui) {
+        $(ui.item).toggleClass("dragging");
+      },
+      update: function() {
+        var newRank = 1;
+        $('.sortable-cards').each(function(card) {
+          var cardID = card.attr('data-id');
+        })
+      },
+      placeholder: "placeholder"
+    });
     $( ".sortable-cards" ).disableSelection();
-    $( ".sortable-lists").sortable();
+    $( ".sortable-lists").sortable({
+      start: function(event, ui) {
+        $(ui.item).toggleClass("dragging");
+        ui.placeholder.height(ui.item.height());
+      },
+      stop: function(event, ui) {
+        $(ui.item).toggleClass("dragging");
+      },
+      placeholder: "placeholder" 
+    });
     $( ".sortable-lists").disableSelection();
   });
 </script>

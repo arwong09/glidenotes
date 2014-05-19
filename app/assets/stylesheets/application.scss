@@ -20,5 +20,27 @@
 }
 
 .sortable-cards {
+  min-height: 20px;
   padding: 0;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+}
+
+.sortable-lists {
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+}
+
+.dragging {
+  box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.1);
+  transform: rotate(5deg);
+  -ms-transform:rotate(5deg);
+  -webkit-transform:rotate(5deg); /* Opera, Chrome, and Safari */
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+}
+
+.placeholder {
+  background-color: #f6f6f6;
+  list-style: none;
 }
