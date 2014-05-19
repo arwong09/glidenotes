@@ -6,22 +6,20 @@ Trellino.Models.List = Backbone.Model.extend({
    this.board_id = options.board_id; 
   },
   cards: function(){
-    if (!this.get('cards')) {
-      var listCards = new Trellino.Collections.Cards([], {
+    if (!this._cards) {
+      this._cards = new Trellino.Collections.Cards([], {
         list: this
       });
-      
-      this.set({
-        cards: listCards
-      })
     }
-    return this.get('cards');
+  return this._cards;
   },
   parse: function(response) {
-    if(response['cards']) {
-      this.cards().set(response["cards"]);
-      delete response["cards"];
+    debugger
+    if(response.cards) {
+      this.cards().set(response.cards);
+      delete response.cards;
     }
+    
     return response;
   }
 });
