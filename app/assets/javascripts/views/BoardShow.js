@@ -29,9 +29,12 @@ Trellino.Views.BoardShow = Backbone.View.extend({
           var oldListID = $(this).attr('data-listid');
           var newListID = $(this).parent().attr('data-listid');
           var list = view.model.get('lists').findWhere({id: parseInt(oldListID)});
+          // var newList = view.model.get('lists').findWhere({id: parseInt(newListID)});
           var card = list.cards().findWhere({id: parseInt(cardID)});
-          card.set({rank: newRank, list_id: parseInt(newListID)});
-          card.save();
+          // card.set();
+          // list.cards().remove(card);
+          // newList.cards().add(card);
+          card.save({rank: newRank, list_id: parseInt(newListID)});
           newRank++;
         });
       },

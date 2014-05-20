@@ -7,7 +7,6 @@
 <div class="row">
   <ul class="sortable-lists"><!-- BEGIN UL OF LIST -->
     <% model.lists().each(function(list){ %><!-- ITERATE THROUGH ALL LISTS -->
-      <!-- <div class="col-xs-2"> -->
         <li class="ui-state-default list-panel panel panel-default"
           data-id="<%= list.get('id') %>">
           
@@ -39,7 +38,6 @@
             </ul>
           </div>
         </li>
-      <!-- </div><!-- END LIST COLUMN --> -->
     <% }); %><!--- END ITERATING THROUGH LISTS -->
   </ul>
 </div>
