@@ -12,12 +12,13 @@
  *= require_self
  *= require_tree .
  */
+
+@import "bootstrap";
+
 #content {
   background-color: rgb(35, 113, 159);
 }
 
-
-@import "bootstrap";
 .ui-state-default {
   list-style: none;
   margin: 0;
@@ -25,7 +26,8 @@
 
 
 .navbar-default {
-  background-color: #27709b;
+  background: #27709b;
+  background: -webkit-linear-gradient(top, #27709b 0, #24688f 100%);
   margin: 0;
   border: none;
   border-radius: 0;
@@ -67,9 +69,16 @@ nav {
 }
 
 .placeholder {
-  background-color: #f6f6f6;
+/*  display: inline-block;/**/
+/*  vertical-align: top;*/
+  background-color: #bbb;
   list-style: none;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+/*  content: " ";*/
+/*   display: block; */
+/*   height: 0; */
+/*   clear: both;*/
 }
 
 .list-panel {
@@ -88,13 +97,26 @@ nav {
 }
 
 #card-body {
-  border-radius: 5px;
+  border-radius: 3px;
   padding: none;
+  margin-bottom: 5px;
 }
 
 .panel-body {
   padding: 8px;
-  margin-bottom: 5px;
+  margin-bottom: 0;
   box-shadow: 0 0.5px 0 #aaa;
 }
 
+h4 {
+  font-size: 16px;
+}
+
+.pull-right {
+  float: right;
+}
+
+html, body {
+  height: 100%;
+  background-color: rgb(35, 113, 159);
+}

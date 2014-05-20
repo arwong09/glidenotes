@@ -50,6 +50,8 @@ Trellino.Views.BoardShow = Backbone.View.extend({
     
     $( ".sortable-lists").sortable({
       connectWith: ".sortable-lists",
+      // placeholder: "placeholder",
+      // forcePlaceholderSize: true,
       start: function(event, ui) {
         $(ui.item).toggleClass("dragging");
         ui.placeholder.height(ui.item.height());
@@ -70,7 +72,6 @@ Trellino.Views.BoardShow = Backbone.View.extend({
         });
       },
       tolerance: 'pointer',
-      // placeholder: "placeholder" 
     });
     
     $( ".sortable-lists").disableSelection();
