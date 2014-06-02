@@ -6,6 +6,7 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
   <nav class="navbar navbar-default">
     <div class="container">
@@ -19,17 +20,12 @@
         <li>
           <a href="#board/new">+</a>
         </li>
-        <li>
-          <% if logged_in? %>
-            <%= button_to "Log out", session_url, { method: :delete, class: "btn btn-xs btn-warning" } %>
-          <% end %>
-        </li>
+
       </ul>
     </div>
   </nav>
   
   <div id="content"></div>
-
   <%= yield %>
 </body>
 </html>

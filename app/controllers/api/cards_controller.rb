@@ -22,12 +22,6 @@ module Api
     def update
       @card = Card.find(params[:id])
 
-      if params[:newUserEmail]
-        email = params[:newUserEmail]
-        new_user = User.find_by_email(email)
-        new_user && !@card.users.include?(new_user) && @card.users << new_user
-      end
-
       if @card.update_attributes(card_params)
         render partial: "api/cards/card", locals: { card: @card }
       else

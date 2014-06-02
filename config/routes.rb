@@ -1,5 +1,5 @@
 Trellino::Application.routes.draw do
-  root to: 'static_pages#root'
+  root to: 'api/boards#index'
 
   namespace :api, defaults: { format: :json } do
     resources :boards, except: [:new, :edit] do
@@ -15,6 +15,6 @@ Trellino::Application.routes.draw do
     resources :card_assignments, only: :destroy
   end
 
-  resource :session, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create, :destroy]
+  # resource :session, only: [:new, :create, :destroy]
+  # resources :users, only: [:new, :create, :destroy]
 end

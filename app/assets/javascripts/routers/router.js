@@ -7,6 +7,7 @@ Trellino.Routers.BoardRouter = Backbone.Router.extend({
   },
   
   indexView: function() {
+    debugger
     Trellino.Collections.boards.fetch();
     var view = new Trellino.Views.BoardsIndex({collection: Trellino.Collections.boards});
     $('#content').html(view.$el);
