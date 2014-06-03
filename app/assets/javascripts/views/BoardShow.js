@@ -1,66 +1,82 @@
 Trellino.Views.BoardShow = Backbone.View.extend({
   template: JST['boards/show'],
+  
   render: function() {
     this.model.lists().sort();
     var renderedContent = this.template({model: this.model});
     this.$el.html(renderedContent);
     return this;
   },
+  
   initialize: function() {
     this.listenTo(this.model.lists(), "cardAdded", this.render);
     this.listenTo(this.model.lists(), "cardDestroyed", this.render);
   },
+  
+  events: {
+    'click .glyphicon-plus' : "newCardView",
+    'click .trash-hover' : 'destroyCard'
+  },
+  
   handleSorting: function() {
     var view = this;
     
     $( ".sortable-cards" ).sortable({
       connectWith: ".sortable-cards",
+      
       start: function(event, ui) {
         $(ui.item).toggleClass("dragging");
         ui.placeholder.height(ui.item.height());
       },
+      
       stop: function(event, ui) {
         $(ui.item).toggleClass("dragging");
       },
+      
       update: function(event, ui) {
-        var newRank = 1;
-        $('.card-li').each(function() {
-          var cardID = $(this).attr('data-id');
-          var oldListID = $(this).attr('data-listid');
-          var newListID = $(this).parent().attr('data-listid');
+        $('.list-panel').each(function() {
+          var newRank = 1;
+          $($(this).children().children("ul").children()).each(function() {
+            debugger
+            var cardID = $(this).attr('data-id');
+            var oldListID = $(this).attr('data-listid');
+            var newListID = $(this).parent().attr('data-listid');
           
-          var list = view.model.get('lists').findWhere({id: parseInt(oldListID)});
-          var newList = view.model.get('lists').findWhere({id: parseInt(newListID)});
-          var card = list.cards().findWhere({id: parseInt(cardID)});
-          // card.set();
-          if (card) {
-            card.save({rank: newRank, list_id: parseInt(newListID)});
-            newList.cards().add(card);
-            list.cards().remove(card);
-          }
+            var list = view.model.get('lists').findWhere({id: parseInt(oldListID)});
+            var newList = view.model.get('lists').findWhere({id: parseInt(newListID)});
+            var card = list.cards().findWhere({id: parseInt(cardID)});
+            // card.set();
 
-          newRank++;
-        });
+            if (card) {
+              card.save({rank: newRank, list_id: parseInt(newListID)});
+              newList.cards().add(card);
+              list.cards().remove(card);
+            }
+
+            newRank++;
+          });
+        })
       },
+      
       tolerance: 'pointer',
       placeholder: "placeholder"
     });
     
-    $( ".sortable-cards" ).disableSelection();
+    $(".sortable-cards").disableSelection();
     
-    $( ".sortable-lists").sortable({
+    $(".sortable-lists").sortable({
       connectWith: ".sortable-lists",
-      // placeholder: "placeholder",
-      // forcePlaceholderSize: true,
+      
       start: function(event, ui) {
         $(ui.item).toggleClass("dragging");
         ui.placeholder.height(ui.item.height());
         ui.placeholder.width(ui.item.width());
-        // $(ui.placeholder).toggleClass('custom');
       },
+      
       stop: function(event, ui) {
         $(ui.item).toggleClass("dragging");
       },
+      
       update: function(event, ui) {
         var newRank = 1;
         $('.list-panel').each(function() {
@@ -71,32 +87,13 @@ Trellino.Views.BoardShow = Backbone.View.extend({
           newRank++;
         });
       },
+      
       tolerance: 'pointer',
     });
     
-    $( ".sortable-lists").disableSelection();
+    $(".sortable-lists").disableSelection();
   },
-  events: {
-    'submit #member-form' : "submit",
-    'click .glyphicon-plus' : "newCardView",
-    'click .trash-hover' : 'destroyCard'
-  },
-  submit: function(event) {
-    var view = this;
-    event.preventDefault();
-    var params = $(event.currentTarget).serializeJSON();
-    var thisBoard = this.model;
-    thisBoard.save(params, {
-      success: function() {
-        var renderedView = view.render();
-        $('#content').html(renderedView.$el);
-        view.delegateEvents();
-      },
-      error: function() {
-        $('#errors').html("User not found").addClass('alert alert-danger');
-      }
-    })
-  },
+  
   newCardView: function(event) {
     event.preventDefault();
     var listID = $(event.currentTarget).attr("data-id");
@@ -104,6 +101,7 @@ Trellino.Views.BoardShow = Backbone.View.extend({
     var view = new Trellino.Views.CardsNew({board: this.model, model: list});
     $('#add-card-' + listID).html(view.render().$el);
   },
+  
   destroyCard: function(event) {
     event.preventDefault();
     var listID = $(event.currentTarget).attr("data-listid");

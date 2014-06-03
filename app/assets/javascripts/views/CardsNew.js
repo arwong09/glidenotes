@@ -15,7 +15,6 @@ Trellino.Views.CardsNew = Backbone.View.extend({
     this.model.trigger('cardAdded')
   },
   submit: function(event) {
-
     var view = this;
     event.preventDefault();
     
@@ -24,9 +23,8 @@ Trellino.Views.CardsNew = Backbone.View.extend({
     newCard.save({}, {
       success: function() {
         view.model.cards().add(newCard);
-        // var indexView = new Trellino.Views.BoardsIndex({model: })
-        // $('#content').html(view.render().$el); 
-        // view.delegateEvents();
+        $('#content').html(view.render().$el); 
+        view.delegateEvents();
       }
     });
   }

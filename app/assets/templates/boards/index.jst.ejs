@@ -1,17 +1,18 @@
-<div class="col-xs-12">
-  <h3>My Boards</h3>
+<h3><span class="glyphicon glyphicon-inbox"></span> My Boards</h3>
+
+<div class="row">
   <% collection.each(function(board){ %>
-    <a href="#board/<%= board.get("id") %>">
-      <div class='col-xs-3' style='float: left;'>
-        <div class='panel panel-default'>
-          <div class='panel-body'>
-            <%= board.get('title') %>
-            <a href="#" data-id="<%= board.get('id') %>"
-              class="pull-right glyphicon glyphicon-trash" />
-          </div>
+    <div class='col-xs-3'>    
+      <div class='panel panel-default'> 
+        <div class='panel-body board-body'>
+           <a class="board-body-link" href="#board/<%= board.get("id") %>"> 
+             <%= board.get('title') %>
+             <a href="#" data-id="<%= board.get('id') %>"
+               class="board-remove glyphicon glyphicon-remove">
+             </a>
+           </a>
         </div>
       </div>
-    </a>
-    
-    <% }); %>
+    </div>
+  <% }); %>
 </div>

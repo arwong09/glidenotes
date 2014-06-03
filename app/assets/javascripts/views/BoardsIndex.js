@@ -9,7 +9,7 @@ Trellino.Views.BoardsIndex = Backbone.View.extend({
     this.listenTo(this.collection, "sync remove", this.render);
   },
   events: {
-    "click .glyphicon-trash": "destroyBoard"
+    "click .board-remove": "destroyBoard"
   },
   destroyBoard: function(event) {
     event.preventDefault();

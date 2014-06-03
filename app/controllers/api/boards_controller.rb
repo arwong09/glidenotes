@@ -15,7 +15,7 @@ module Api
     end
 
     def create
-      @board = Board.build(board_params)
+      @board = Board.new(board_params)
       if @board.save
         render partial: "api/boards/board", locals: { board: @board }
       else

@@ -11,7 +11,7 @@
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Trellino</a>
+        <a class="navbar-brand" id="trellino-logo" href="#">Trellino</a>
       </div>
       <ul class="nav nav-pills navbar-right">
         <li>
@@ -24,8 +24,11 @@
       </ul>
     </div>
   </nav>
-  
-  <div id="content"></div>
+  <div class="container">
+    <div class="row">
+      <div id="content"></div>
+    </div>
+  </div>
   <%= yield %>
 </body>
 </html>
